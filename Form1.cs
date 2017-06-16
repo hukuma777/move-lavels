@@ -24,6 +24,17 @@ namespace move_lavels
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Point cpos;
+
+            cpos = PointToClient(MousePosition);
+
+            label2.Text = "" + cpos.X + "," + cpos.Y;
+            label3.Text = "" + MousePosition.X + "," + MousePosition.Y;
+            label4.Left = cpos.X - label4.Width / 2;
+            label4.Top = cpos.Y - label4.Height / 2;
+
+
+
 
             label1.Left += vx;
             label1.Top += vy;
