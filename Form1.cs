@@ -13,17 +13,20 @@ namespace move_lavels
     public partial class Form1 : Form
     {
 
-        int a = 10;
-        int iTime = 0;
-                 
-        int vx = -10;
+        //int a = 10;
+        int iTime = 0;         
+        int vx = rand.Next(1, 101);
+        int vy = rand.Next(1, 101);
 
-        int vy = -10;
+        private static Random rand = new Random();
 
 
         public Form1()
         {
             InitializeComponent();
+
+            label1.Left += rand.Next(1, ClientSize.Width);
+            label1.Top += rand.Next(1, ClientSize.Height);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -39,23 +42,23 @@ namespace move_lavels
             label3.Text = "" + MousePosition.X + "," + MousePosition.Y;
 
             //ラベルついてくる
-            //label4.Left = cpos.X - label4.Width / 2;
-            //label4.Top = cpos.Y - label4.Height / 2;
-            label1.Text = "HP" + a;
+            label4.Left = cpos.X - label4.Width / 2;
+            label4.Top = cpos.Y - label4.Height / 2;
+            //label1.Text = "HP" + a;
 
-            if (a==0)
+            /*if (a==0)
             {
                 label1.Visible = false;
-            }
+            }*/
  
             if (cpos.X > label1.Left 
                 && cpos.X < label1.Right 
                 && cpos.Y > label1.Top 
                 && cpos.Y < label1.Bottom)
             {
-                //label1.Visible = false;
+                label1.Visible = false;
 
-                a--;
+                //a--;
             }
 
 
@@ -99,9 +102,25 @@ namespace move_lavels
 
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Visible = true;
-            a += 20;
+            // 0以上、intの範囲内の乱数
+            Text = "" + rand.Next();
+            // さいころの目の例
+            Text += "," + ((rand.Next() % 6) + 1);
 
+            // 0以上、指定の値「未満」の乱数
+            //以下は、0～5までの乱数
+            Text += "/" + rand.Next(6);
+
+            // 指定の値以上、指定の値「未満」の乱数
+            // 以下は、１～６までの乱数
+            Text += "/" + rand.Next(1, 7);
+
+            // 0～1未満の乱数
+            Text += "/" + rand.NextDouble();
+            // NextDoubleを使って、１～６の乱数を算出するには？
+            Text += "/" + (int)(rand.NextDouble() * 6.0 + 1.0);
+            // NextDouble()の最大値=0
+            // NextDouble()の最小値=99.999
         }
     }
 }
